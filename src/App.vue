@@ -1,15 +1,18 @@
 <template>
   <div>
     <grid></grid>
+    <apexChart></apexChart>
   </div>
 </template>
 
 <script>
 import Grid from './components/Grid'
+import ApexChart from './components/Chart'
 
 export default {
   components: {
     'grid':Grid,
+    'apexChart': ApexChart,
   }
 };
 </script>
