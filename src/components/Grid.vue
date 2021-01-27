@@ -16,8 +16,12 @@
 
 <script>
 import { AgGridVue } from "ag-grid-vue";
+import axios from "axios";
 
 export default {
+  components: {
+    AgGridVue,
+  },
   data: function() {
     return {
       columnDefs: null,
@@ -25,22 +29,19 @@ export default {
       paginationPageSize: null,
     };
   },
-  components: {
-    AgGridVue,
-  },
   beforeMount() {
-    this.paginationPageSize = 10;
+    this.paginationPageSize = 20;
     this.columnDefs = [
       {
         headerName: "KEYWORDS",
-        field: "keywords",
+        field: "keyword",
         sortable: true,
         filter: true,
         width: 230,
       },
       {
         headerName: "SEARCH VOLUME",
-        field: "volume",
+        field: "avgSearchVolume",
         sortable: true,
         filter: true,
         width: 170,
@@ -54,28 +55,28 @@ export default {
       },
       {
         headerName: "CHANGE",
-        field: "beforeChange",
+        field: "diffRank",
         sortable: true,
         filter: true,
         width: 120,
       },
       {
         headerName: "PX RANK",
-        field: "pxrank",
+        field: "pixelRank",
         sortable: true,
         filter: true,
         width: 120,
       },
       {
         headerName: "CHANGE",
-        field: "afterChange",
+        field: "diffPixelRank",
         sortable: true,
         filter: true,
         width: 120,
       },
       {
         headerName: "URL-PAGE",
-        field: "url",
+        field: "landingPage",
         sortable: true,
         filter: true,
         width: 210,
@@ -88,208 +89,18 @@ export default {
         width: 120,
       },
     ];
-    this.rowData = [
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-      {
-        keywords: "lorem ipsum dolar sit amet",
-        volume: "444.4k",
-        rank: "44",
-        beforeChange: "44",
-        pxrank: "44.4k",
-        afterChange: "44",
-        url: "/lorem-ipsum-dolar-sit-amet",
-        cpc: "44.44",
-      },
-    ];
+    axios
+      .post(process.env.VUE_APP_LIST_API, {
+        firstDate: "2020-02-25",
+        lastDate: "2020-02-20",
+        domain: "akakce.com",
+        limit: "250",
+        page: 3,
+      })
+      .then(({ data }) => {
+        this.rowData = data;
+      })
+      .catch((e) => console.log(e));
   },
 };
 </script>
@@ -337,10 +148,10 @@ export default {
   }
 }
 
-.ag-theme-alpine,.ag-root-wrapper {
-    border: none!important;
-  }
-
+.ag-theme-alpine,
+.ag-root-wrapper {
+  border: none !important;
+}
 
 .ag-theme-alpine {
   box-sizing: unset;
@@ -354,13 +165,13 @@ export default {
   overflow: unset;
 }
 
-.ag-body-viewport [col-id="keywords"],
-.ag-body-viewport [col-id="volume"],
+.ag-body-viewport [col-id="keyword"],
+.ag-body-viewport [col-id="avgSearchVolume"],
 .ag-body-viewport [col-id="rank"],
-.ag-body-viewport [col-id="beforeChange"],
-.ag-body-viewport [col-id="pxrank"],
-.ag-body-viewport [col-id="afterChange"],
-.ag-body-viewport [col-id="url"],
+.ag-body-viewport [col-id="pixelRank"],
+.ag-body-viewport [col-id="diffRank"],
+.ag-body-viewport [col-id="diffPixelRank"],
+.ag-body-viewport [col-id="landingPage"],
 .ag-body-viewport [col-id="cpc"] {
   color: #6b6b99;
 }
@@ -369,8 +180,8 @@ export default {
   background-color: red;
 }
 
-.ag-body-viewport [col-id="beforeChange"],
-.ag-body-viewport [col-id="afterChange"] {
+.ag-body-viewport [col-id="diffRank"],
+.ag-body-viewport [col-id="diffPixelRank"] {
   background-color: #ecfcf7;
   width: 66px !important;
   height: 36px;
@@ -380,16 +191,16 @@ export default {
   color: #21d99b;
 }
 
-.ag-body-viewport [col-id="keywords"] {
+.ag-body-viewport [col-id="keyword"] {
   border-right: 1px solid #e3e3fc !important;
 }
 
-.ag-body-viewport [col-id="afterChange"] {
+.ag-body-viewport [col-id="diffPixelRank"] {
   background-color: #fff0f4;
   color: #ff4d79;
 }
 
-.ag-body-viewport [col-id="url"] {
+.ag-body-viewport [col-id="landingPage"] {
   color: #7373ff;
 }
 
