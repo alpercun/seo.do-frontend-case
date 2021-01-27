@@ -309,7 +309,7 @@ export default {
   background-color: #ffffff;
   padding-top: 10px;
   width: 1142px;
-  height: 566px;
+  height: 600px;
   border-radius: 6px;
 }
 

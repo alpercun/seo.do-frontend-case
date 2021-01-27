@@ -1,6 +1,6 @@
 <template>
   <div class="grid ml">
-    <div id="app">
+    <div id="main">
       <h1 class="header ml">SEARCH VOLUME</h1>
       <apexcharts
         id="chart"
@@ -98,7 +98,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 #chart {
   display: flex;
   justify-content: center;
@@ -106,13 +105,12 @@ export default {
   padding-left: 8px;
 }
 
-.ml{
+.ml {
   font-size: 24px;
 }
 
-#app{
-  background-color: unset;
+#main{
+  width: 1142px;
+  height: 566px;
 }
-
-
 </style>
