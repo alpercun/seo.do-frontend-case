@@ -133,6 +133,12 @@ export default {
   .ag-header {
     background-color: #fcfcff;
   }
+  .ag-row{
+    background-color: #ffffff;
+  }
+  .ag-row:hover{
+    background-color: #f9f9ff;
+  }
 }
 
 .ag-header-group-cell-label,
@@ -162,7 +168,8 @@ export default {
 
 .ag-cell-value,
 .ag-group-value {
-  overflow: unset;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ag-body-viewport [col-id="keyword"],
