@@ -9,12 +9,14 @@
         :options="chartOptions"
         :series="series"
       ></apexcharts>
+      <button @click="updateChart">Update!</button>
     </div>
   </div>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+import axios from "axios";
 
 export default {
   components: {
@@ -94,6 +96,21 @@ export default {
       ],
     };
   },
+  methods: {
+    updateChart() {
+      axios
+        .post(process.env.VUE_APP_ITEM_API, {
+          country: "tr",
+          lang: "tr",
+          keyword: "ankara",
+        })
+        .then(({ data }) => {
+          console.log(typeof data);
+          this.series = [...this.series, { data: data.map((o) => o.volume) }];
+        })
+        .catch((e) => console.log(e));
+    },
+  },
 };
 </script>
 
@@ -109,7 +126,7 @@ export default {
   font-size: 24px;
 }
 
-#main{
+#main {
   width: 1142px;
   height: 566px;
 }
