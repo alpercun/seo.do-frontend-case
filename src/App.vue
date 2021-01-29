@@ -1,18 +1,26 @@
 <template>
   <div>
-    <Grid></Grid>
-    <Chart></Chart>
+    <Grid
+      @keywordWasEdited="selectedKeyword = $event"
+      :selectedKeyword="selectedKeyword"
+    ></Grid>
+    <Chart :selectedKeyword="selectedKeyword"></Chart>
   </div>
 </template>
 
 <script>
-import Grid from './components/Grid'
-import Chart from './components/Chart'
+import Grid from "./components/Grid";
+import Chart from "./components/Chart";
 
 export default {
   components: {
     Grid,
     Chart,
+  },
+  data: function() {
+    return {
+      selectedKeyword: "",
+    };
   },
 };
 </script>

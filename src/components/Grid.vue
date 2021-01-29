@@ -9,6 +9,7 @@
         :rowData="rowData"
         :pagination="true"
         :paginationPageSize="paginationPageSize"
+        @rowClicked="onRowClicked"
       ></ag-grid-vue>
     </div>
   </div>
@@ -28,6 +29,18 @@ export default {
       rowData: null,
       paginationPageSize: null,
     };
+  },
+  methods: {
+    onRowClicked(params) {
+      console.log(params.node.data.keyword);
+      this.changeKeyword(params.node.data.keyword);
+      if (params.node.data.diffRank > 0) {
+        console.log((this.field = "+" + params.node.data.diffRank));
+      }
+    },
+    changeKeyword(keyword) {
+      this.$emit("keywordWasEdited", keyword);
+    },
   },
   beforeMount() {
     this.paginationPageSize = 20;
@@ -94,7 +107,7 @@ export default {
         firstDate: "2020-02-25",
         lastDate: "2020-02-20",
         domain: "akakce.com",
-        limit: "250",
+        limit: "100",
         page: 3,
       })
       .then(({ data }) => {
@@ -119,7 +132,7 @@ export default {
 #app {
   background-color: #ffffff;
   padding-top: 10px;
-  width: 1142px;
+  width: 1190px;
   height: 600px;
   border-radius: 6px;
 }
@@ -133,10 +146,10 @@ export default {
   .ag-header {
     background-color: #fcfcff;
   }
-  .ag-row{
+  .ag-row {
     background-color: #ffffff;
   }
-  .ag-row:hover{
+  .ag-row:hover {
     background-color: #f9f9ff;
   }
 }

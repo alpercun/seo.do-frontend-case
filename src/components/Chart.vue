@@ -2,6 +2,7 @@
   <div class="grid ml">
     <div id="main">
       <h1 class="header ml">SEARCH VOLUME</h1>
+      <p class="chart-header">{{ selectedKeyword }}</p>
       <apexcharts
         id="chart"
         height="300"
@@ -9,7 +10,7 @@
         :options="chartOptions"
         :series="series"
       ></apexcharts>
-      <button @click="updateChart">Update!</button>
+      <button class="button" @click="updateChart">Update</button>
     </div>
   </div>
 </template>
@@ -22,6 +23,9 @@ export default {
   components: {
     apexcharts: VueApexCharts,
   },
+  props: {
+    selectedKeyword: String,
+  },
   data: function() {
     return {
       chartOptions: {
@@ -32,20 +36,6 @@ export default {
         dataLabels: {
           style: {
             colors: ["#9999CC"],
-          },
-        },
-        title: {
-          text: "lorem ipsum dolar sit amet",
-          align: "left",
-          margin: 10,
-          offsetX: 0,
-          offsetY: 0,
-          floating: false,
-          style: {
-            fontSize: "14px",
-            fontWeight: "regular",
-            fontFamily: "Barlow, sans-serif",
-            color: "#6B6B99",
           },
         },
         dataLabels: {
@@ -91,7 +81,7 @@ export default {
       series: [
         {
           name: "series-1",
-          data: [80, 150, 105, 150, 109, 50, 70, 90, 30, 40, 60, 80],
+          data: ["", "", "", "", "", "", "", "", "", "", "", ""],
         },
       ],
     };
@@ -102,7 +92,7 @@ export default {
         .post(process.env.VUE_APP_ITEM_API, {
           country: "tr",
           lang: "tr",
-          keyword: "ankara",
+          keyword: this.selectedKeyword,
         })
         .then(({ data }) => {
           console.log(typeof data);
@@ -129,5 +119,27 @@ export default {
 #main {
   width: 1142px;
   height: 566px;
+}
+
+.chart-header{
+  color: #6b6b99;
+  font-size: 14px;
+  margin-left: 28px;
+  padding-top: 20px;
+}
+
+.button{
+  color: #6b6b99;
+  background-color: #fcfcff;
+  border-radius: 4px;
+  border: none;
+  padding: 10px;
+  transition: .4s;
+}
+
+.button:hover{
+  color: #fcfcff;
+  background-color: #6b6b99;
+  transition: .4s;
 }
 </style>
