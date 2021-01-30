@@ -32,11 +32,7 @@ export default {
   },
   methods: {
     onRowClicked(params) {
-      console.log(params.node.data.keyword);
       this.changeKeyword(params.node.data.keyword);
-      if (params.node.data.diffRank > 0) {
-        console.log((this.field = "+" + params.node.data.diffRank));
-      }
     },
     changeKeyword(keyword) {
       this.$emit("keywordWasEdited", keyword);
@@ -62,6 +58,7 @@ export default {
       {
         headerName: "RANK",
         field: "rank",
+        valueFormatter: '"⭑ " + value.toLocaleString()',
         sortable: true,
         filter: true,
         width: 99,
@@ -69,9 +66,19 @@ export default {
       {
         headerName: "CHANGE",
         field: "diffRank",
+        valueFormatter: (params) =>
+          params.value > 0
+            ? `${"+" + params.value.toLocaleString()}`
+            : `${params.value.toLocaleString()}`,
         sortable: true,
         filter: true,
         width: 120,
+        cellStyle: (params) =>
+          params.value == 0
+            ? { background: "white", color: "#6b6b99" }
+            : params.value > 0
+            ? { background: "#ecfcf7", color: "#21d99b" }
+            : { background: "#fff0f4", color: "#ff4d79" },
       },
       {
         headerName: "PX RANK",
@@ -83,9 +90,19 @@ export default {
       {
         headerName: "CHANGE",
         field: "diffPixelRank",
+        valueFormatter: (params) =>
+          params.value > 0
+            ? `${"+" + params.value.toLocaleString() + "%"}`
+            : `${params.value.toLocaleString() + "%"}`,
         sortable: true,
         filter: true,
         width: 120,
+        cellStyle: (params) =>
+          params.value == 0
+            ? { background: "white", color: "#6b6b99" }
+            : params.value > 0
+            ? { background: "#ecfcf7", color: "#21d99b" }
+            : { background: "#fff0f4", color: "#ff4d79" },
       },
       {
         headerName: "URL-PAGE",
@@ -196,28 +213,29 @@ export default {
   color: #6b6b99;
 }
 
+.ag-body-viewport [col-id="rank"]:first-letter {
+  color: #ffbf40;
+}
+
 .ag-body-viewport .rowData:hover {
   background-color: red;
 }
 
 .ag-body-viewport [col-id="diffRank"],
 .ag-body-viewport [col-id="diffPixelRank"] {
-  background-color: #ecfcf7;
-  width: 66px !important;
+  width: 89px !important;
   height: 36px;
-  margin: 2px 0 0 18px;
+  margin: 2px 0 0 0;
   border-radius: 4px;
   text-align: center;
-  color: #21d99b;
+}
+
+.ag-body-viewport [col-id="diffRank"] {
+  width: 70px !important;
 }
 
 .ag-body-viewport [col-id="keyword"] {
   border-right: 1px solid #e3e3fc !important;
-}
-
-.ag-body-viewport [col-id="diffPixelRank"] {
-  background-color: #fff0f4;
-  color: #ff4d79;
 }
 
 .ag-body-viewport [col-id="landingPage"] {
