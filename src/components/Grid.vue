@@ -116,7 +116,7 @@ export default {
         field: "cpc",
         sortable: true,
         filter: true,
-        width: 120,
+        width: 180,
       },
     ];
     axios
@@ -149,7 +149,7 @@ export default {
 #app {
   background-color: #ffffff;
   padding-top: 10px;
-  width: 1190px;
+  width: 1250px;
   height: 600px;
   border-radius: 6px;
 }

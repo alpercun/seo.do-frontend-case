@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Search> </Search>
     <Grid
       @keywordWasEdited="selectedKeyword = $event"
       :selectedKeyword="selectedKeyword"
@@ -11,11 +12,13 @@
 <script>
 import Grid from "./components/Grid";
 import Chart from "./components/Chart";
+import Search from "./components/Search";
 
 export default {
   components: {
     Grid,
     Chart,
+    Search,
   },
   data: function() {
     return {
