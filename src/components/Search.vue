@@ -1,15 +1,16 @@
 <template>
   <div>
     <h1 class="search-header">Enter the domain you want to search</h1>
-    <form class="search-form">
+    <div class="search-form">
       <div class="icon">
         <IconSearch />
       </div>
       <input
-        type="text"
         placeholder="Search domain"
+        v-model="tempDomain"
+        @keyup.enter="submit"
       />
-    </form>
+    </div>
   </div>
 </template>
 
@@ -18,6 +19,17 @@ import IconSearch from "../assets/search.svg";
 export default {
   components: {
     IconSearch,
+  },
+  data: function() {
+    return {
+      tempDomain: "",
+    };
+  },
+  methods: {
+    submit: function() {
+      this.$emit("inputData", this.tempDomain);
+      this.tempDomain = "";
+    },
   },
 };
 </script>

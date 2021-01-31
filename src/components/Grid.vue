@@ -2,6 +2,11 @@
   <div class="grid">
     <div id="app">
       <h1 class="header">Zeo Interview</h1>
+      <div class="list-domain">
+        <li v-for="(domain, index) in domainList" :item="domain" :key="index">
+          {{ domain }}
+        </li>
+      </div>
       <ag-grid-vue
         style="width: 100%; height: 516px"
         class="ag-theme-alpine"
@@ -23,19 +28,31 @@ export default {
   components: {
     AgGridVue,
   },
+  props: {
+    dmn: {
+      type: String,
+    },
+  },
   data: function() {
     return {
       columnDefs: null,
       rowData: null,
       paginationPageSize: null,
+      domainList: [],
     };
   },
   methods: {
     onRowClicked(params) {
       this.changeKeyword(params.node.data.keyword);
+      console.log(this.domainList[this.domainList.length - 1]);
     },
     changeKeyword(keyword) {
       this.$emit("keywordWasEdited", keyword);
+    },
+  },
+  watch: {
+    dmn: function() {
+      this.domainList.push(this.dmn);
     },
   },
   beforeMount() {
@@ -157,6 +174,26 @@ export default {
 .header {
   color: #6b6b99;
   margin-left: 18px;
+}
+
+.list-domain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  width: 80%;
+  li {
+    max-width: 30%;
+    background-color: #f9f9ff;
+    padding: 5px;
+    border-radius: 4px;
+    list-style-type: none;
+    margin-left: 10px;
+    color: #9999cc;
+    margin-top: -80px;
+    margin-right: 10px;
+  }
 }
 
 .ag-theme-alpine {
