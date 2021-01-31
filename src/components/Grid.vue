@@ -2,11 +2,6 @@
   <div class="grid">
     <div id="app">
       <h1 class="header">Zeo Interview</h1>
-      <div class="list-domain">
-        <li v-for="(domain, index) in domainList" :item="domain" :key="index">
-          {{ domain }}
-        </li>
-      </div>
       <ag-grid-vue
         style="width: 100%; height: 516px"
         class="ag-theme-alpine"
@@ -29,7 +24,7 @@ export default {
     AgGridVue,
   },
   props: {
-    dmn: {
+    domainName: {
       type: String,
     },
   },
@@ -38,21 +33,32 @@ export default {
       columnDefs: null,
       rowData: null,
       paginationPageSize: null,
-      domainList: [],
+      domain: "trendyol.com",
     };
   },
   methods: {
     onRowClicked(params) {
       this.changeKeyword(params.node.data.keyword);
-      console.log(this.domainList[this.domainList.length - 1]);
     },
     changeKeyword(keyword) {
       this.$emit("keywordWasEdited", keyword);
     },
   },
   watch: {
-    dmn: function() {
-      this.domainList.push(this.dmn);
+    domainName: function() {
+      this.domain = this.domainName;
+      axios
+        .post(process.env.VUE_APP_LIST_API, {
+          firstDate: "2020-02-25",
+          lastDate: "2020-02-20",
+          domain: this.domain,
+          limit: "100",
+          page: 1,
+        })
+        .then(({ data }) => {
+          this.rowData = data;
+        })
+        .catch((e) => console.log(e));
     },
   },
   beforeMount() {
@@ -140,9 +146,9 @@ export default {
       .post(process.env.VUE_APP_LIST_API, {
         firstDate: "2020-02-25",
         lastDate: "2020-02-20",
-        domain: "akakce.com",
+        domain: this.domain,
         limit: "100",
-        page: 3,
+        page: 1,
       })
       .then(({ data }) => {
         this.rowData = data;
@@ -174,26 +180,6 @@ export default {
 .header {
   color: #6b6b99;
   margin-left: 18px;
-}
-
-.list-domain {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  float: right;
-  width: 80%;
-  li {
-    max-width: 30%;
-    background-color: #f9f9ff;
-    padding: 5px;
-    border-radius: 4px;
-    list-style-type: none;
-    margin-left: 10px;
-    color: #9999cc;
-    margin-top: -80px;
-    margin-right: 10px;
-  }
 }
 
 .ag-theme-alpine {

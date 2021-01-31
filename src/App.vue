@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Search @inputData="updateMessage"> </Search>
+    <Search @inputData="setDomain"> </Search>
     <Grid
       @keywordWasEdited="selectedKeyword = $event"
       :selectedKeyword="selectedKeyword"
-      :dmn="childDomain"
+      :domainName="domainName"
     ></Grid>
     <Chart :selectedKeyword="selectedKeyword"></Chart>
   </div>
@@ -24,12 +24,12 @@ export default {
   data: function() {
     return {
       selectedKeyword: "",
-      childDomain: "",
+      domainName: "",
     };
   },
   methods: {
-    updateMessage(variable) {
-      this.childDomain = variable;
+    setDomain(variable) {
+      this.domainName = variable;
     },
   },
 };
