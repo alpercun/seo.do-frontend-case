@@ -201,6 +201,10 @@ export default {
   color: #9999cc;
 }
 
+.ag-theme-alpine .ag-simple-filter-body-wrapper {
+  background-color: #fcfcff;
+}
+
 .ag-cell-label-container {
   .ag-header-cell-sorted-none {
     padding: -5px;
@@ -311,7 +315,7 @@ export default {
   #app {
     width: 85%;
   }
-  .grid{
+  .grid {
     margin-top: 30px;
   }
 }

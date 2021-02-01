@@ -10,7 +10,6 @@
         :options="chartOptions"
         :series="series"
       ></apexcharts>
-      <button class="button" @click="updateChart">Update</button>
     </div>
   </div>
 </template>
@@ -86,8 +85,8 @@ export default {
       ],
     };
   },
-  methods: {
-    updateChart() {
+  watch: {
+    selectedKeyword: function() {
       axios
         .post(process.env.VUE_APP_ITEM_API, {
           country: "tr",
@@ -126,21 +125,6 @@ export default {
   font-size: 14px;
   margin-left: 28px;
   padding-top: 20px;
-}
-
-.button {
-  color: #6b6b99;
-  background-color: #fcfcff;
-  border-radius: 4px;
-  border: none;
-  padding: 10px;
-  transition: 0.4s;
-}
-
-.button:hover {
-  color: #fcfcff;
-  background-color: #6b6b99;
-  transition: 0.4s;
 }
 
 @media screen and (max-width: 1280px) {
