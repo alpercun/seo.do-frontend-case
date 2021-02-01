@@ -306,4 +306,13 @@ export default {
     width: 85%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  #app {
+    width: 85%;
+  }
+  .grid{
+    margin-top: 30px;
+  }
+}
 </style>

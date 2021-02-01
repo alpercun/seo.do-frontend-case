@@ -117,29 +117,43 @@ export default {
 }
 
 #main {
-  width: 1142px;
+  width: 1260px;
   height: 566px;
 }
 
-.chart-header{
+.chart-header {
   color: #6b6b99;
   font-size: 14px;
   margin-left: 28px;
   padding-top: 20px;
 }
 
-.button{
+.button {
   color: #6b6b99;
   background-color: #fcfcff;
   border-radius: 4px;
   border: none;
   padding: 10px;
-  transition: .4s;
+  transition: 0.4s;
 }
 
-.button:hover{
+.button:hover {
   color: #fcfcff;
   background-color: #6b6b99;
-  transition: .4s;
+  transition: 0.4s;
+}
+
+@media screen and (max-width: 1280px) {
+  #chart {
+    max-width: 100%;
+  }
+  .header {
+    margin-left: 24px;
+  }
+
+  #main {
+    width: 86%;
+    height: 566px;
+  }
 }
 </style>
