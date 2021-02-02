@@ -13,6 +13,7 @@
         />
       </div>
     </div>
+    <p v-if="isEmpty">Please enter valid domain address in the field.</p>
   </div>
 </template>
 
@@ -25,12 +26,17 @@ export default {
   data: function() {
     return {
       tempDomain: "",
+      isEmpty: false,
     };
   },
   methods: {
     submit: function() {
-      this.$emit("inputData", this.tempDomain);
-      this.tempDomain = "";
+      if (this.tempDomain !== "") {
+        this.$emit("inputData", this.tempDomain);
+        this.isEmpty = false;
+      } else {
+        this.isEmpty = true;
+      }
     },
   },
 };
@@ -40,6 +46,11 @@ export default {
 .search-header {
   color: #6b6b99;
   font-size: 30px;
+  text-align: center;
+}
+
+p {
+  color: #ff4d79;
   text-align: center;
 }
 
