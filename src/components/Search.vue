@@ -13,7 +13,7 @@
         />
       </div>
     </div>
-    <p v-if="isEmpty">Please enter valid domain address in the field.</p>
+    <p class="warning" v-if="isEmpty">Please enter valid domain address in the field.</p>
   </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
   text-align: center;
 }
 
-p {
+.warning {
   color: #ff4d79;
   text-align: center;
 }

@@ -3,6 +3,7 @@
     <div id="app">
       <h1 class="header">Zeo Interview</h1>
       <ag-grid-vue
+        id="ag-grid"
         style="width: 100%; height: 516px"
         class="ag-theme-alpine"
         :columnDefs="columnDefs"
