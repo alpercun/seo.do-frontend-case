@@ -82,7 +82,7 @@ export default {
       {
         headerName: "RANK",
         field: "rank",
-        valueFormatter: '"⭑ " + value.toLocaleString()',
+        valueFormatter: '"★ " + value.toLocaleString()',
         sortable: true,
         filter: true,
         width: 99,
