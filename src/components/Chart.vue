@@ -2,7 +2,9 @@
   <div class="grid ml">
     <div id="main">
       <h1 class="header ml">SEARCH VOLUME</h1>
-      <p class="chart-header">{{ selectedKeyword }}</p>
+      <p v-if="selectedKeyword" class="chart-header">
+        Last added: {{ selectedKeyword }}
+      </p>
       <apexcharts
         id="chart"
         height="300"
@@ -31,7 +33,7 @@ export default {
         chart: {
           id: "vuechart-example",
         },
-        colors: ["#9999CC"],
+        colors: ["#9999CC", "#7F7FA9", "#636383", "#45455D"],
         dataLabels: {
           style: {
             colors: ["#9999CC"],
@@ -77,12 +79,7 @@ export default {
           },
         },
       },
-      series: [
-        {
-          name: "series-1",
-          data: ["", "", "", "", "", "", "", "", "", "", "", ""],
-        },
-      ],
+      series: [],
     };
   },
   watch: {
@@ -94,8 +91,13 @@ export default {
           keyword: this.selectedKeyword,
         })
         .then(({ data }) => {
-          console.log(typeof data);
-          this.series = [...this.series, { data: data.map((o) => o.volume) }];
+          this.series = [
+            ...this.series,
+            {
+              name: this.selectedKeyword,
+              data: data.map((mounth) => mounth.volume),
+            },
+          ];
         })
         .catch((e) => console.log(e));
     },
