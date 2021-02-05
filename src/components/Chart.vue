@@ -3,8 +3,9 @@
     <div id="main">
       <h1 class="header ml">SEARCH VOLUME</h1>
       <div class="header-info">
+        <h1 v-if="selectedKeyword">Last added:</h1>
         <p v-if="selectedKeyword" class="chart-header">
-          Last added: {{ selectedKeyword }}
+          {{ selectedKeyword }}
         </p>
         <button
           class="clearButton"
@@ -144,11 +145,19 @@ export default {
   .header-info {
     display: flex;
     align-items: center;
-    .chart-header {
+    h1{
       color: #6b6b99;
       font-size: 14px;
       margin-left: 28px;
       padding-top: 20px;
+      font-weight: bold;
+    }
+    .chart-header {
+      color: #6b6b99;
+      font-size: 14px;
+      margin-left: 10px;
+      padding-top: 20px;
+      font-weight: 200;
     }
 
     .clearButton {
