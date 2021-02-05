@@ -2,9 +2,18 @@
   <div class="grid ml">
     <div id="main">
       <h1 class="header ml">SEARCH VOLUME</h1>
-      <p v-if="selectedKeyword" class="chart-header">
-        Last added: {{ selectedKeyword }}
-      </p>
+      <div class="header-info">
+        <p v-if="selectedKeyword" class="chart-header">
+          Last added: {{ selectedKeyword }}
+        </p>
+        <button
+          class="clearButton"
+          v-if="selectedKeyword"
+          @click="clearChartData"
+        >
+          Clear
+        </button>
+      </div>
       <apexcharts
         id="chart"
         height="300"
@@ -102,17 +111,16 @@ export default {
         .catch((e) => console.log(e));
     },
   },
+  methods: {
+    clearChartData: function() {
+      this.series = [];
+      this.selectedKeyword = "";
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-#chart {
-  display: flex;
-  justify-content: center;
-  max-width: 760px;
-  padding-left: 8px;
-}
-
 .ml {
   font-size: 24px;
 }
@@ -120,13 +128,38 @@ export default {
 #main {
   width: 1260px;
   height: 566px;
-}
 
-.chart-header {
-  color: #6b6b99;
-  font-size: 14px;
-  margin-left: 28px;
-  padding-top: 20px;
+  #chart {
+    display: flex;
+    justify-content: center;
+    max-width: 760px;
+    padding-left: 8px;
+  }
+
+  .header-info {
+    display: flex;
+    align-items: center;
+    .chart-header {
+      color: #6b6b99;
+      font-size: 14px;
+      margin-left: 28px;
+      padding-top: 20px;
+    }
+
+    .clearButton {
+      border: 1px solid #e3e3fc;
+      border-radius: 4px;
+      padding: 6px;
+      background: #f7f7fc;
+      transition: 0.4s;
+      margin-left:24px;
+      margin-top: 20px;
+    }
+    .clearButton:hover {
+      background: #6b6b99;
+      color: #ffffff;
+    }
+  }
 }
 
 @media screen and (max-width: 1280px) {
