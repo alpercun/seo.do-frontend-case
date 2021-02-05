@@ -6,7 +6,7 @@
       :selectedKeyword="selectedKeyword"
       :domainName="domainName"
     ></Grid>
-    <Chart :selectedKeyword="selectedKeyword"></Chart>
+    <Chart :selectedKeyword="selectedKeyword" :domainName="domainName"></Chart>
   </div>
 </template>
 

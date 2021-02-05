@@ -11,7 +11,7 @@
           v-if="selectedKeyword"
           @click="clearChartData"
         >
-          Clear
+          Clear Chart
         </button>
       </div>
       <apexcharts
@@ -35,6 +35,7 @@ export default {
   },
   props: {
     selectedKeyword: String,
+    domainName: String,
   },
   data: function() {
     return {
@@ -110,6 +111,10 @@ export default {
         })
         .catch((e) => console.log(e));
     },
+    domainName: function() {
+      this.series = [];
+      this.selectedKeyword = "";
+    },
   },
   methods: {
     clearChartData: function() {
@@ -152,7 +157,7 @@ export default {
       padding: 6px;
       background: #f7f7fc;
       transition: 0.4s;
-      margin-left:24px;
+      margin-left: 24px;
       margin-top: 20px;
     }
     .clearButton:hover {
